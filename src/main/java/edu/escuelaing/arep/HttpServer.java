@@ -63,13 +63,14 @@ public class HttpServer {
                         + "</head>"
                         + "<body>"
                         + "<h1>  Ciudad a buscar</h1>"
+                        + "<form"
                         + "<input type=\"text\" class=\"form-control\" placeholder=\"Clima\" id=\"Clima\" style=\"margin-bottom: 10px\">"
                         + "<input id=\"button-Clima\" type=\"submit\" value=\"Buscar\" class=\"btns\" >"
                         + "<h4  id=\"climasl\"></h4>"
                         + "</body>"
                         + "</html>" + inputLine;
             }
-            else if (file.startsWith("/Consultas?lugar=")){
+            else if (file.contains("/Consultas?lugar=")){
                 outputLine = "HTTP/1.1 200 OK\r\n"
                         + "Conten-Type: text/html\r\n"
                         + "\r'n";
