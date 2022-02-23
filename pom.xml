@@ -7,7 +7,6 @@
   <groupId>edu.arep</groupId>
   <artifactId>WebServer</artifactId>
   <version>1.0-SNAPSHOT</version>
-  <packaging>war</packaging>
 
   <name>WebServer Maven Webapp</name>
   <!-- FIXME change it to the project's website -->
