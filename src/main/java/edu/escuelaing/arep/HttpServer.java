@@ -77,19 +77,9 @@ public class HttpServer {
             }else if (file.contains("/consulta?lugar=")){
                 filesplit = file.split("=");
                 outputLine = "HTTP/1.1 200 OK\r\n"
-                        + "Content-Type: text /html\r\n"
+                        + "Content-Type: application/json\r\n"
                         + "\r\n"
-                        + "<!DOCTYPE html>"
-                        + "<html>"
-                        + "<head>"
-                        + "<meta charset=\"UTF-8\">"
-                        + "<title>Consultando</title>\n"
-                        + "</head>"
-                        + "<body>"
-                        + "<h1> Consultando Clima </h1>"
-                        + "</body>"
-                        + "</html>" + inputLine;
-                outputLine += CreandoCon(filesplit[1]);
+                        + CreandoCon(filesplit[1]);
             }else{
                 outputLine = "HTTP/1.1 200 OK\r\n"
                         + "Content-Type: text /html\r\n"
@@ -116,7 +106,7 @@ public class HttpServer {
 
     public static String CreandoCon(String Ciudad) throws IOException {
 
-        String url = "https://api.openweathermap.org/data/2.5/weather?q=" + Ciudad +  "&appid=dc42292589bfac773004653d2a65173";
+        String url = "http://api.openweathermap.org/data/2.5/weather?q=" + Ciudad +  "&appid=dc42292589bfac773004653d2a65173";
         URL urlClima = new URL(url);
         HttpsURLConnection conectarUrl = (HttpsURLConnection)urlClima.openConnection();
         BufferedReader in = new BufferedReader(new InputStreamReader(conectarUrl.getInputStream()));
