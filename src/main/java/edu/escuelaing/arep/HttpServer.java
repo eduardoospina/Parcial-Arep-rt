@@ -45,7 +45,7 @@ public class HttpServer {
                 }
             }
 
-            if(inputLine.equals("/Clima")){
+            if(inputLine.equals("/clima")){
                 outputLine = "HTTP/1.1 200 OK\r\n"
                         + "Content-Type: text /html\r\n"
                         + "\r\n"
@@ -60,7 +60,7 @@ public class HttpServer {
                         + "</body>"
                         + "</html>" + inputLine;
             }
-            else if (inputLine.equals("/Consultas")){
+            else if (inputLine.equals("/consultas")){
                 outputLine = "HTTP/1.1 200 OK\r\n"
                         + "Content-Type: text /html\r\n"
                         + "\r\n"
