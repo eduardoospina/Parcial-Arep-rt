@@ -77,7 +77,7 @@ public class HttpServer {
                 String[] path;
                 path = file.split("=");
                 Clima clima = new Clima();
-                outputLine += clima.Clima(path[1]);
+                outputLine += Clima.Clima(path[1]);
 
             }
             else{
