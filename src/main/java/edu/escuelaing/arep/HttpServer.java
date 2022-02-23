@@ -56,7 +56,7 @@ public class HttpServer {
                         + "<title>Title of the document</title>\n"
                         + "</head>"
                         + "<body>"
-                        + "Web Page"
+                        + "Web Page 3"
                         + "</body>"
                         + "</html>" + inputLine;
             }
@@ -71,7 +71,7 @@ public class HttpServer {
                         + "<title>Title of the document</title>\n"
                         + "</head>"
                         + "<body>"
-                        + "Web Page"
+                        + "Web Page 2"
                         + "</body>"
                         + "</html>" + inputLine;
             }
@@ -90,8 +90,6 @@ public class HttpServer {
                         + "</body>"
                         + "</html>" + inputLine;
             }
-
-            //Siempre responde la misma página
 
                 out.println(outputLine);
                 out.close();
