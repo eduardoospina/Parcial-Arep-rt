@@ -16,9 +16,9 @@ public class HttpServer {
 
     public static void main(String[] args) throws Exception {
 
-
         ServerSocket serverSocket = null;
         gson = new Gson();
+
         boolean running = true;
 
         try {
@@ -44,7 +44,7 @@ public class HttpServer {
             String inputLine, outputLine;
             String file = "";
             boolean primeraLinea = true;
-            String[] fsplits ;
+            String[] fsplits;
 
             while ((inputLine = in.readLine()) != null) {
                 System.out.println("Received: " + inputLine);
