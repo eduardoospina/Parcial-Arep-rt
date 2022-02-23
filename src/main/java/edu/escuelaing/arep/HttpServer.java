@@ -86,6 +86,7 @@ public class HttpServer {
                         + "<title>Consultando</title>\n"
                         + "</head>"
                         + "<body>"
+                        + "<h1> Consultando Clima </h1>"
                         + "</body>"
                         + "</html>" + inputLine;
                 outputLine += CreandoCon(filesplit[1]);
