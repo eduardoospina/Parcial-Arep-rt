@@ -62,7 +62,7 @@ public class HttpServer {
                         + "<title>Title of the document</title>\n"
                         + "</head>"
                         + "<body>"
-                        + "<h1  'Ciudad a buscar''></h1>"
+                        + "<h1  'Ciudad a buscar'></h1>"
                         + "<input type=\"text\" class=\"form-control\" placeholder=\"Clima\" id=\"Clima\" style=\"margin-bottom: 10px\">"
                         + "<input id=\"button-Clima\" type=\"submit\" value=\"Buscar\" class=\"btns\" >"
                         + "<h4  id=\"climasl\"></h4>"
