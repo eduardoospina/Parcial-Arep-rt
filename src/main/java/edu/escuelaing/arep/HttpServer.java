@@ -45,9 +45,6 @@ public class HttpServer {
                 }
             }
 
-
-
-
             //Siempre responde la misma página
 
                 outputLine = "HTTP/1.1 200 OK\r\n"
