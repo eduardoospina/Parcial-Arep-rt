@@ -15,7 +15,7 @@ public class HttpServer {
 
 
     public static void main(String[] args) throws Exception {
-         Gson gson = new Gson();
+         gson = new Gson();
 
         ServerSocket serverSocket = null;
         boolean running = true;
