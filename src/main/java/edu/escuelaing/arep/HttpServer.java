@@ -9,16 +9,13 @@ import java.io.*;
 
 public class HttpServer {
 
+    private static Gson gson;
     private ServerSocket serverSocket;
     private Socket clientSocket;
-    private static Gson gson;
-
 
     public static void main(String[] args) throws Exception {
-
         ServerSocket serverSocket = null;
         gson = new Gson();
-
         boolean running = true;
 
         try {
@@ -27,6 +24,7 @@ public class HttpServer {
             System.err.println("Could not listen on port: 35000.");
             System.exit(1);
         }
+
         while (running) {
 
             Socket clientSocket = null; //Cliente socket
@@ -41,24 +39,23 @@ public class HttpServer {
             PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true); //Flujo de salida
             BufferedReader in = new BufferedReader( //Flujo de entrada
                     new InputStreamReader(clientSocket.getInputStream()));
-            String inputLine, outputLine;
+            String inputLine, outputLine = null;
             String file = "";
+            String[] filesplit ;
             boolean primeraLinea = true;
-            String[] fsplits;
-
             while ((inputLine = in.readLine()) != null) {
-                System.out.println("Received: " + inputLine);
                 if (primeraLinea) {
                     file = inputLine.split(" ")[1];
-                    System.out.println("File: " + file);
                     primeraLinea = false;
                 }
+                System.out.println("Received: " + inputLine);
                 if (!in.ready()) {
                     break;
                 }
             }
-
-            if(file.startsWith("/Clima")){
+            System.out.println(file);
+            //Siempre responde la misma página
+            if(file.startsWith("/Clima")) {
                 outputLine = "HTTP/1.1 200 OK\r\n"
                         + "Content-Type: text /html\r\n"
                         + "\r\n"
@@ -76,9 +73,9 @@ public class HttpServer {
                         + "<h4  id=\"climasl\"></h4>"
                         + "</body>"
                         + "</html>" + inputLine;
-            }
-            else if (file.contains("/Consultas?lugar=")){
-                fsplits = file.split("=");
+
+            }else if (file.contains("/consulta?lugar=")){
+                filesplit = file.split("=");
                 outputLine = "HTTP/1.1 200 OK\r\n"
                         + "Content-Type: text /html\r\n"
                         + "\r\n"
@@ -86,16 +83,13 @@ public class HttpServer {
                         + "<html>"
                         + "<head>"
                         + "<meta charset=\"UTF-8\">"
-                        + "<title>Title of the document</title>\n"
+                        + "<title>Consultando</title>\n"
                         + "</head>"
                         + "<body>"
-                        + "consulta:"
                         + "</body>"
                         + "</html>" + inputLine;
-                outputLine += CreandoCon(fsplits[1]);
-
-            }
-            else{
+                outputLine += CreandoCon(filesplit[1]);
+            }else{
                 outputLine = "HTTP/1.1 200 OK\r\n"
                         + "Content-Type: text /html\r\n"
                         + "\r\n"
@@ -103,25 +97,25 @@ public class HttpServer {
                         + "<html>"
                         + "<head>"
                         + "<meta charset=\"UTF-8\">"
-                        + "<title>Title of the document</title>\n"
+                        + "<title>web page</title>\n"
                         + "</head>"
                         + "<body>"
-                        + "Web Page"
+                        + "<h1> web page </h1>"
                         + "</body>"
                         + "</html>" + inputLine;
             }
 
-                out.println(outputLine);
-                out.close();
-                in.close();
-                clientSocket.close();
-            }
+            out.println(outputLine);
+            out.close();
+            in.close();
+            clientSocket.close();
+        }
         serverSocket.close();
     }
 
     public static String CreandoCon(String Ciudad) throws IOException {
 
-        String url = "https://api.openweathermap.org/data/2.5/weather?q="+Ciudad +"&appid=dc42292589bfac773004653d2a65173";
+        String url = "https://api.openweathermap.org/data/2.5/weather?q=" + Ciudad +  "&appid=dc42292589bfac773004653d2a65173";
         URL urlClima = new URL(url);
         HttpsURLConnection conectarUrl = (HttpsURLConnection)urlClima.openConnection();
         BufferedReader in = new BufferedReader(new InputStreamReader(conectarUrl.getInputStream()));
@@ -140,4 +134,3 @@ public class HttpServer {
     }
 
 }
-
