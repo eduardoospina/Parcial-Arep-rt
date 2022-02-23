@@ -5,7 +5,6 @@ import com.google.gson.Gson;
 import javax.net.ssl.HttpsURLConnection;
 import java.net.*;
 import java.io.*;
-import java.util.*;
 
 
 public class HttpServer {
@@ -81,8 +80,18 @@ public class HttpServer {
                 fsplits = file.split("=");
                 outputLine = "HTTP/1.1 200 OK\r\n"
                         + "Content-Type: text /html\r\n"
-                        + "\r\n";
-                outputLine += CreandoConexionApi(fsplits[1]);
+                        + "\r\n"
+                        + "<!DOCTYPE html>"
+                        + "<html>"
+                        + "<head>"
+                        + "<meta charset=\"UTF-8\">"
+                        + "<title>Title of the document</title>\n"
+                        + "</head>"
+                        + "<body>"
+                        + "consulta:"
+                        + "</body>"
+                        + "</html>" + inputLine;
+                outputLine += CreandoCon(fsplits[1]);
 
             }
             else{
@@ -109,9 +118,9 @@ public class HttpServer {
         serverSocket.close();
     }
 
-    public static String CreandoConexionApi(String Ciudad) throws IOException {
+    public static String CreandoCon(String Ciudad) throws IOException {
 
-        String url = "https://api.openweathermap.org/data/2.5/weather?q=" + Ciudad +  "&appid=dc42292589bfac773004653d2a65173";
+        String url = "https://api.openweathermap.org/data/2.5/weather?q="+Ciudad +"&appid=dc42292589bfac773004653d2a65173";
         URL urlClima = new URL(url);
         HttpsURLConnection conectarUrl = (HttpsURLConnection)urlClima.openConnection();
         BufferedReader in = new BufferedReader(new InputStreamReader(conectarUrl.getInputStream()));
