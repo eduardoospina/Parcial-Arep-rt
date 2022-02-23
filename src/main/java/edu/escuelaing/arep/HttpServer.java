@@ -1,5 +1,8 @@
 package edu.escuelaing.arep;
 
+import com.google.gson.Gson;
+
+import javax.net.ssl.HttpsURLConnection;
 import java.net.*;
 import java.io.*;
 import java.util.*;
@@ -9,9 +12,12 @@ public class HttpServer {
 
     private ServerSocket serverSocket;
     private Socket clientSocket;
+    private static Gson gson;
 
 
     public static void main(String[] args) throws Exception {
+         Gson gson = new Gson();
+
         ServerSocket serverSocket = null;
         boolean running = true;
 
@@ -38,6 +44,7 @@ public class HttpServer {
             String inputLine, outputLine;
             String file = "";
             boolean primeraLinea = true;
+            String[] fsplits ;
 
             while ((inputLine = in.readLine()) != null) {
                 System.out.println("Received: " + inputLine);
@@ -71,13 +78,11 @@ public class HttpServer {
                         + "</html>" + inputLine;
             }
             else if (file.contains("/Consultas?lugar=")){
+                fsplits = file.split("=");
                 outputLine = "HTTP/1.1 200 OK\r\n"
-                        + "Conten-Type: text/html\r\n"
-                        + "\r'n";
-                String[] path;
-                path = file.split("=");
-                Clima clima = new Clima();
-                outputLine += Clima.Clima(path[1]);
+                        + "Content-Type: text /html\r\n"
+                        + "\r\n";
+                outputLine += CreandoConexionApi(fsplits[1]);
 
             }
             else{
@@ -102,6 +107,19 @@ public class HttpServer {
                 clientSocket.close();
             }
         serverSocket.close();
+    }
+
+    public static String CreandoConexionApi(String Ciudad) throws IOException {
+
+        String url = "https://api.openweathermap.org/data/2.5/weather?q=" + Ciudad +  "&appid=dc42292589bfac773004653d2a65173";
+        URL urlClima = new URL(url);
+        HttpsURLConnection conectarUrl = (HttpsURLConnection)urlClima.openConnection();
+        BufferedReader in = new BufferedReader(new InputStreamReader(conectarUrl.getInputStream()));
+        String input, output = "";
+        while ((input = in.readLine()) != null){
+            output += input;
+        }
+        return gson.toJson(output);
     }
 
     static int getPort() {
