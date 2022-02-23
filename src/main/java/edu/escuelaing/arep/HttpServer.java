@@ -45,8 +45,7 @@ public class HttpServer {
                 }
             }
 
-            //Siempre responde la misma página
-
+            if(inputLine.equals("/Clima")){
                 outputLine = "HTTP/1.1 200 OK\r\n"
                         + "Content-Type: text /html\r\n"
                         + "\r\n"
@@ -60,6 +59,40 @@ public class HttpServer {
                         + "Web Page"
                         + "</body>"
                         + "</html>" + inputLine;
+            }
+            else if (inputLine.equals("/Consultas")){
+                outputLine = "HTTP/1.1 200 OK\r\n"
+                        + "Content-Type: text /html\r\n"
+                        + "\r\n"
+                        + "<!DOCTYPE html>"
+                        + "<html>"
+                        + "<head>"
+                        + "<meta charset=\"UTF-8\">"
+                        + "<title>Title of the document</title>\n"
+                        + "</head>"
+                        + "<body>"
+                        + "Web Page"
+                        + "</body>"
+                        + "</html>" + inputLine;
+            }
+            else{
+                outputLine = "HTTP/1.1 200 OK\r\n"
+                        + "Content-Type: text /html\r\n"
+                        + "\r\n"
+                        + "<!DOCTYPE html>"
+                        + "<html>"
+                        + "<head>"
+                        + "<meta charset=\"UTF-8\">"
+                        + "<title>Title of the document</title>\n"
+                        + "</head>"
+                        + "<body>"
+                        + "Web Page"
+                        + "</body>"
+                        + "</html>" + inputLine;
+            }
+
+            //Siempre responde la misma página
+
                 out.println(outputLine);
                 out.close();
                 in.close();
