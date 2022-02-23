@@ -21,7 +21,6 @@ public class HttpServer {
             System.err.println("Could not listen on port: 35000.");
             System.exit(1);
         }
-
         while (running) {
 
             Socket clientSocket = null; //Cliente socket
@@ -37,15 +36,22 @@ public class HttpServer {
             BufferedReader in = new BufferedReader( //Flujo de entrada
                     new InputStreamReader(clientSocket.getInputStream()));
             String inputLine, outputLine;
+            String file = "";
+            boolean primeraLinea = true;
 
             while ((inputLine = in.readLine()) != null) {
                 System.out.println("Received: " + inputLine);
+                if (primeraLinea) {
+                    file = inputLine.split(" ")[1];
+                    System.out.println("File: " + file);
+                    primeraLinea = false;
+                }
                 if (!in.ready()) {
                     break;
                 }
             }
 
-            if(inputLine.equals("/clima")){
+            if(file.startsWith("/Clima")){
                 outputLine = "HTTP/1.1 200 OK\r\n"
                         + "Content-Type: text /html\r\n"
                         + "\r\n"
@@ -60,7 +66,7 @@ public class HttpServer {
                         + "</body>"
                         + "</html>" + inputLine;
             }
-            else if (inputLine.equals("/consultas")){
+            else if (file.startsWith("/Consultas")){
                 outputLine = "HTTP/1.1 200 OK\r\n"
                         + "Content-Type: text /html\r\n"
                         + "\r\n"
