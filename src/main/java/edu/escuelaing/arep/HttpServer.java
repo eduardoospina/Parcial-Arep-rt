@@ -69,20 +69,16 @@ public class HttpServer {
                         + "</body>"
                         + "</html>" + inputLine;
             }
-            else if (file.startsWith("/Consultas")){
+            else if (file.startsWith("/Consultas?lugar=")){
                 outputLine = "HTTP/1.1 200 OK\r\n"
-                        + "Content-Type: text /html\r\n"
-                        + "\r\n"
-                        + "<!DOCTYPE html>"
-                        + "<html>"
-                        + "<head>"
-                        + "<meta charset=\"UTF-8\">"
-                        + "<title>Title of the document</title>\n"
-                        + "</head>"
-                        + "<body>"
-                        + "Web Page 2"
-                        + "</body>"
-                        + "</html>" + inputLine;
+                        + "Conten-Type: text/html\r\n"
+                        + "\r'n";
+                String[] path;
+                path = file.split("=");
+                Clima clima = new Clima();
+                outputLine += clima.Clima(path[1]);
+                System.out.println(outputLine);
+
             }
             else{
                 outputLine = "HTTP/1.1 200 OK\r\n"
