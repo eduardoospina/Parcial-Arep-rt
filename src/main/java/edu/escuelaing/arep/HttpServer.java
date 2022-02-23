@@ -78,7 +78,6 @@ public class HttpServer {
                 path = file.split("=");
                 Clima clima = new Clima();
                 outputLine += clima.Clima(path[1]);
-                System.out.println(outputLine);
 
             }
             else{
