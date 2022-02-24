@@ -87,7 +87,9 @@ public class HttpServer {
                         + "<title>web page</title>\n"
                         + "</head>"
                         + "<body>"
-                        + "<h1> web page </h1>"
+                        + "<h1> Recurso web para identificar el clima actual dependiendo de la ciudad desea </h1>"
+                        + "<h2> Si desea buscar el clima de una ciudad especifica porfavor ingrese a: https://climaarep-p.herokuapp.com/Clima</h2>"
+                        + "<h2> Si por el contrario desea acceder directamente al API porfavor ingrese a, ingresando la ciudad que desea directamnte.: https://climaarep-p.herokuapp.com/consulta?lugar='ciudad desea a conocer clima'</h2>"
                         + "</body>"
                         + "</html>" + inputLine;
             }
