@@ -63,10 +63,14 @@ public class HttpServer {
                         + "</head>"
                         + "<body>"
                         + "<h1>  Ciudad a buscar</h1>"
-                        + "<form"
-                        + "<input type=\"text\" class=\"form-control\" placeholder=\"Clima\" id=\"clima\" style=\"margin-bottom: 10px\">"
-                        + "<input id=\"button-Clima\" type=\"submit\" value=\"Buscar\" class=\"btns\" >"
-                        + "<h4  id=\"climasl\"></h4>"
+                        + "<input type='text' class='form-control' placeholder='Clima' name='clima' id='clima' style=margin-bottom: 10px>"
+                        + "<input id='button-Clima' type='submit' value='Buscar' onclick='Climas()' >"
+                        + "<p  id='climasl' ><b></b></p>"
+                        + "<script>"
+                        + "const url = 'https://climaarep-p.herokuapp.com/consulta?lugar=';"
+                        + "const valor = document.getElementById('clima')"
+                        + "const resultado = document.getEelementById('climasl')"
+                        + "</script>"
                         + "</body>"
                         + "</html>" + inputLine;
 
