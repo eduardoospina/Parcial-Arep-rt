@@ -1,7 +1,5 @@
 package edu.escuelaing.arep;
 
-import com.google.gson.Gson;
-
 import javax.net.ssl.HttpsURLConnection;
 import java.net.*;
 import java.io.*;
@@ -9,13 +7,11 @@ import java.io.*;
 
 public class HttpServer {
 
-    private static Gson gson;
     private ServerSocket serverSocket;
     private Socket clientSocket;
 
     public static void main(String[] args) throws Exception {
         ServerSocket serverSocket = null;
-        gson = new Gson();
         boolean running = true;
 
         try {
@@ -79,7 +75,7 @@ public class HttpServer {
                 outputLine = "HTTP/1.1 200 OK\r\n"
                         + "Content-Type: application/json\r\n"
                         + "\r\n"
-                        + CreandoCon(filesplit[1]);
+                        + Clima.consultarclima(filesplit[1]);
             }else{
                 outputLine = "HTTP/1.1 200 OK\r\n"
                         + "Content-Type: text /html\r\n"
@@ -102,19 +98,6 @@ public class HttpServer {
             clientSocket.close();
         }
         serverSocket.close();
-    }
-
-    public static String CreandoCon(String Ciudad) throws IOException {
-
-        String url = "http://api.openweathermap.org/data/2.5/weather?q=" + Ciudad +  "&appid=dc42292589bfac773004653d2a65173";
-        URL urlClima = new URL(url);
-        HttpsURLConnection conectarUrl = (HttpsURLConnection)urlClima.openConnection();
-        BufferedReader in = new BufferedReader(new InputStreamReader(conectarUrl.getInputStream()));
-        String input, output = "";
-        while ((input = in.readLine()) != null){
-            output += input;
-        }
-        return gson.toJson(output);
     }
 
     static int getPort() {
