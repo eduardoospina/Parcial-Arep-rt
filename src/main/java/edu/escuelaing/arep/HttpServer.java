@@ -83,7 +83,7 @@ public class HttpServer {
                         + "}"
                         + "});"
                         + "console.log('res', res);\n"
-                        + "const result = await res.json();\n"
+                        + "const resultados1 = await res.json();\n"
                         + "console.log('resultados1', resultados1);\n"
                         + "return resultados1;\n"
                         + "}"
