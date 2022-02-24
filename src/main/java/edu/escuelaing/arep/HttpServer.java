@@ -1,6 +1,5 @@
 package edu.escuelaing.arep;
 
-import javax.net.ssl.HttpsURLConnection;
 import java.net.*;
 import java.io.*;
 
@@ -64,12 +63,28 @@ public class HttpServer {
                         + "<body>"
                         + "<h1>  Ciudad a buscar</h1>"
                         + "<input type='text' class='form-control' placeholder='Clima' name='clima' id='clima' style=margin-bottom: 10px>"
-                        + "<input id='button-Clima' type='submit' value='Buscar' onclick='Climas()' >"
+                        + "<input id='button-Clima' type='submit' value='Buscar' onclick='ClimasE()' >"
                         + "<p  id='climasl' ><b></b></p>"
                         + "<script>"
-                        + "const url = 'https://climaarep-p.herokuapp.com/consulta?lugar=';"
-                        + "const valor = document.getElementById('clima')"
-                        + "const resultado = document.getEelementById('climasl')"
+                        + "const urls = 'https://climaarep-p.herokuapp.com/consulta?lugar=';"
+                        + "const valor = document.getElementById('clima');"
+                        + "const resultado = document.getElementById('climasl');"
+                        + "async function ClimasE(){ \n"
+                        + "const answer = await GetData(valor.value);"
+                        + "const respuestas = JSON.stringify(answer);"
+                        + " resultado.innerHTML = `Resultado: ${respuestas}`;"
+                        + "}"
+                        + "async function GetData(valor){  \n"
+                        + "const urlconseguir = `${urls}${valor}`;"
+                        + "const rest = await fetch(urlconseguir, { \n"
+                        + " method: 'GET',\n"
+                        + "headers: {\n"
+                        +"'Content-Type': 'application/json'"
+                        + "}"
+                        +"});"
+                        + "const resultados1 = await res.json();\n"
+                        +"return resultados1;\n"
+                        + "}"
                         + "</script>"
                         + "</body>"
                         + "</html>" + inputLine;
@@ -79,7 +94,7 @@ public class HttpServer {
                 outputLine = "HTTP/1.1 200 OK\r\n"
                         + "Content-Type: application/json\r\n"
                         + "\r\n"
-                        + Clima.consultarclima(filesplit[1]);
+                        + AccesoApi.consultarclima(filesplit[1]);
             }else{
                 outputLine = "HTTP/1.1 200 OK\r\n"
                         + "Content-Type: text /html\r\n"

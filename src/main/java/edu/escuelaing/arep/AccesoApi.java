@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class Clima {
+public class AccesoApi {
 
     public static String consultarclima(String city) throws MalformedURLException {
 
